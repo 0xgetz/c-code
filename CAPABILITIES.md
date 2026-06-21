@@ -1,8 +1,37 @@
-# Agent Capabilities
+# 🤖 Agent Capabilities
 
-> A sanitized, high-level overview of what this agent ("My First Agent", built on the [Gumloop](https://gumloop.com) platform) can do.
+> A sanitized, high-level overview of what this agent — **"My First Agent"**, built on the [Gumloop](https://gumloop.com) platform — can do.
 >
-> **No secrets, credentials, system prompts, MCP auth/config, or internal implementation code are included here** — only public-safe capability metadata (tool names + descriptions).
+> **No secrets, credentials, system prompts, MCP auth/config, or internal implementation code are included here.** Only public-safe capability metadata (tool names + descriptions).
+
+---
+
+## 📑 Table of contents
+
+1. [At a glance](#-at-a-glance)
+2. [Connected integrations](#-connected-integrations-servers)
+3. [Tool categories](#-tool-categories)
+4. [MCP tool inventory](#-mcp-tool-inventory)
+5. [Automation: trigger types](#-automation-trigger-types)
+6. [Sandbox environment](#-sandbox-environment)
+7. [Example tasks](#-example-tasks)
+8. [Skills](#-skills-name--description-only)
+9. [What is intentionally excluded](#-what-is-intentionally-excluded)
+
+---
+
+## 📊 At a glance
+
+| Metric | Count |
+|--------|------:|
+| Connected MCP servers | **3** |
+| Total MCP tools | **82** |
+| ↳ GitHub | 64 |
+| ↳ Firecrawl | 9 |
+| ↳ Reducto | 9 |
+| Built-in tool categories | **8** |
+| Integration trigger types | **18** |
+| Skills | **6** |
 
 ---
 
@@ -20,16 +49,16 @@
 
 ## 🧰 Tool categories
 
-The agent can use the following kinds of tools (categories only — no credentials):
-
-- **Integration (MCP) tools** — discover and execute actions on connected servers (see full inventory below).
-- **Web search** — find current information on the web.
-- **Web fetch** — read the contents of a specific URL.
-- **Image generation** — create images from text descriptions.
-- **Sandbox** — an isolated Linux environment for shell commands, Python (pandas, numpy, matplotlib, …), and file read/write/search/import/export.
-- **Interaction search** — recall context from previous conversations.
-- **Triggers & schedules** — run automatically on external events or on a schedule.
-- **Sub-agents** — delegate focused tasks to parallel agent instances.
+| Category | What it does |
+|----------|--------------|
+| **Integration (MCP) tools** | Discover and execute actions on connected servers (full inventory below) |
+| **Web search** | Find current information on the web |
+| **Web fetch** | Read the contents of a specific URL |
+| **Image generation** | Create images from text descriptions |
+| **Sandbox** | Isolated Linux env: shell, Python, file read/write/search, import/export |
+| **Interaction search** | Recall context from previous conversations |
+| **Triggers & schedules** | Run automatically on external events or on a schedule |
+| **Sub-agents** | Delegate focused tasks to parallel agent instances |
 
 ---
 
@@ -37,7 +66,7 @@ The agent can use the following kinds of tools (categories only — no credentia
 
 The full list of tools exposed by each connected MCP server (names + descriptions only — **no auth, endpoints, secret IDs, or config**).
 
-### GitHub
+### GitHub `(64)`
 
 | Tool | Description |
 |------|-------------|
@@ -105,7 +134,7 @@ The full list of tools exposed by each connected MCP server (names + description
 | `update_project_item` | Update the position/order of a project item |
 | `update_pull_request` | Update a pull request |
 
-### Firecrawl
+### Firecrawl `(9)`
 
 | Tool | Description |
 |------|-------------|
@@ -119,7 +148,7 @@ The full list of tools exposed by each connected MCP server (names + description
 | `deep_extract` | Autonomously navigate and extract data based on a prompt |
 | `get_deep_extract_status` | Get status/results of a deep extract job |
 
-### Reducto
+### Reducto `(9)`
 
 | Tool | Description |
 |------|-------------|
@@ -132,6 +161,63 @@ The full list of tools exposed by each connected MCP server (names + description
 | `get_job_status` | Get the status/result of a processing job |
 | `list_jobs` | List processing jobs (paginated) |
 | `cancel_job` | Cancel a running processing job |
+
+---
+
+## ⚡ Automation: trigger types
+
+The agent can set up automated workflows that fire on a schedule or on external events. Available **integration trigger** types (each requires the relevant integration to be connected):
+
+| Trigger | Fires on |
+|---------|----------|
+| Gmail Reader | New emails |
+| Google Calendar Event Reader | Calendar events |
+| Google Drive Folder Reader | New/changed files in a folder |
+| Google Sheets Reader | New/changed sheet rows |
+| Google Form Responses Reader | New form responses |
+| Slack Message Reader | New Slack messages |
+| Slack Reaction Reader | New Slack reactions |
+| Teams Message Reader | New Teams messages |
+| Notion Database Reader | New/changed database items |
+| Airtable Reader | New/changed records |
+| HubSpot List Reader | List membership changes |
+| Salesforce Record Reader | New/changed records |
+| Zendesk Ticket Reader | New/updated tickets |
+| Linear Issue Reader | New/updated issues |
+| Jira Issue Reader | New/updated issues |
+| Typeform Submission Reader | New form submissions |
+| Incident.io Incidents Reader | New incidents |
+| Parallel Web Monitor | Web page changes |
+
+Plus **scheduled tasks** (recurring cron or one-time) and **custom polling triggers** that combine multiple services with custom logic.
+
+---
+
+## 🖥️ Sandbox environment
+
+An isolated Linux sandbox with Python 3 + Node available. Highlights of pre-installed Python libraries (categories):
+
+- **Data & analysis:** pandas, numpy, scipy, scikit-learn, statsmodels-style tooling, sympy
+- **Visualization:** matplotlib, seaborn, plotly, bokeh
+- **Documents:** PyMuPDF, pypdf, pdf2image, python-docx, python-pptx, openpyxl, reportlab, weasyprint, markitdown
+- **Web / scraping:** requests, aiohttp, beautifulsoup4, scrapy, selenium, playwright
+- **Media:** pillow, opencv-python, imageio, moviepy, librosa, soundfile
+- **AI / ML SDKs:** openai, anthropic, google-genai, replicate, pinecone, nltk, spacy, gensim
+- **Cloud / DB:** boto3, google-api-python-client, psycopg2, pymongo, PyMySQL, pyodbc
+
+> Additional packages can be installed on demand.
+
+---
+
+## 💡 Example tasks
+
+- "Summarize the open issues in `owner/repo` and draft a triage comment."
+- "Create a branch, add a file, and open a pull request."
+- "Scrape this website and give me a structured summary of its pricing page."
+- "Parse this PDF contract and extract the key terms as JSON."
+- "Build a chart from this CSV and export it as an image."
+- "Notify me whenever a new issue is opened in my repository." *(trigger)*
+- "Every weekday at 9am, summarize yesterday's commits." *(schedule)*
 
 ---
 
@@ -161,4 +247,4 @@ For security and confidentiality, the following are **never** exported:
 
 ---
 
-*Generated as a sanitized capabilities summary. Last updated: 2026-06-21.*
+*Sanitized capabilities summary · Last updated: 2026-06-21*
