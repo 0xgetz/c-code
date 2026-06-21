@@ -1,10 +1,26 @@
 # c-code
 
-> An extracted/unpacked TypeScript source tree of the **Claude Code** CLI (Anthropic's agentic coding assistant for the terminal).
+> An extracted/unpacked **TypeScript source tree of the Claude Code CLI** (Anthropic's agentic coding assistant for the terminal).
 
-This repository currently ships the source as a single archive, **`mytest.zip`** (~10 MB compressed, ~34 MB unpacked). Unzipping it produces a `mytest/` directory containing **1,900+ source files** (`.ts` / `.tsx` / `.js`) that make up the application.
+The source is available **two ways** in this repo:
 
-> ⚠️ **Note:** This is the internal source of a proprietary product (see `https://claude.com/claude-code`). It is provided here for reference/inspection only. Respect the original software's license and terms when using it.
+- 📦 **`mytest.zip`** — the original archive (~10 MB compressed)
+- 🗂️ **`mytest/`** — the same source **fully unpacked** into 1,900+ browsable files
+
+> ⚠️ **Note:** This appears to be the internal source of a proprietary product (see `https://claude.com/claude-code`). It is provided here for reference/inspection only. Respect the original software's license and terms.
+
+---
+
+## 📑 Contents
+
+- [What's inside](#-whats-inside)
+- [Tech stack](#-tech-stack)
+- [Repository layout](#️-repository-layout)
+- [Built-in tools](#-built-in-tools)
+- [Slash commands](#-slash-commands)
+- [Getting started](#-getting-started)
+- [Other files](#-other-files)
+- [License](#-license)
 
 ---
 
@@ -12,15 +28,19 @@ This repository currently ships the source as a single archive, **`mytest.zip`**
 
 | Item | Value |
 |------|-------|
-| Archive | `mytest.zip` |
-| Unpacked root | `mytest/` |
-| Total source files | ~1,902 |
+| Original archive | `mytest.zip` |
+| Unpacked tree | `mytest/` |
+| Total source files | **1,902** |
 | TypeScript (`.ts`) | 1,332 |
 | React/Ink (`.tsx`) | 552 |
 | JavaScript (`.js`) | 18 |
-| Unpacked size | ~34 MB |
+| Unpacked size | ~30 MB |
 
-### Tech stack (inferred from imports)
+---
+
+## 🧱 Tech stack
+
+Inferred from imports across the source:
 
 - **Runtime / bundler:** [Bun](https://bun.sh) (`import { feature } from 'bun:bundle'`)
 - **Terminal UI:** [Ink](https://github.com/vadimdemedes/ink) (React for the CLI)
@@ -33,7 +53,7 @@ This repository currently ships the source as a single archive, **`mytest.zip`**
 
 ## 🗂️ Repository layout
 
-After `unzip mytest.zip`, the key directories under `mytest/` are:
+Key directories under `mytest/`:
 
 ```
 mytest/
@@ -68,7 +88,11 @@ mytest/
 └── utils/                # Shared utilities
 ```
 
-### Built-in tools (`mytest/tools/`)
+---
+
+## 🧰 Built-in tools
+
+Located in `mytest/tools/` (40+):
 
 `AgentTool`, `AskUserQuestionTool`, `BashTool`, `PowerShellTool`, `FileReadTool`,
 `FileWriteTool`, `FileEditTool`, `NotebookEditTool`, `GlobTool`, `GrepTool`,
@@ -79,9 +103,11 @@ mytest/
 `EnterPlanModeTool` / `ExitPlanModeTool`, `EnterWorktreeTool` / `ExitWorktreeTool`,
 `SleepTool`, `ConfigTool`, `BriefTool`, and more.
 
-### Slash commands (`mytest/commands/`)
+---
 
-Over 100 commands, including:
+## ⌨️ Slash commands
+
+Located in `mytest/commands/` (100+), including:
 `/init`, `/commit`, `/commit-push-pr`, `/review`, `/security-review`, `/mcp`,
 `/model`, `/config`, `/login`, `/logout`, `/memory`, `/compact`, `/context`,
 `/agents`, `/plugin`, `/skills`, `/doctor`, `/cost`, `/status`, `/resume`,
@@ -92,20 +118,30 @@ Over 100 commands, including:
 ## 🚀 Getting started
 
 ```bash
-# Clone and unpack the source
+# Clone the repo
 git clone https://github.com/0xgetz/c-code.git
 cd c-code
-unzip mytest.zip          # → creates mytest/
 
-# Explore
+# Browse the already-unpacked source
 cd mytest
 ls
+
+# ...or unpack the archive yourself
+unzip mytest.zip
 ```
 
-There is no `package.json`, `tsconfig.json`, or build configuration included in
-the archive, so this tree is intended for **reading and inspection**, not for a
-direct build. To compile or run it you would need to supply the original
-project's build setup (Bun, dependencies, and config).
+There is no `package.json`, `tsconfig.json`, or build configuration in the
+archive, so this tree is intended for **reading and inspection**, not a direct
+build. Compiling it would require the original project's build setup (Bun,
+dependencies, and config).
+
+---
+
+## 📂 Other files
+
+- **[`CAPABILITIES.md`](CAPABILITIES.md)** — a sanitized overview of the AI agent
+  that assembled this repository (connected integrations, MCP tool inventory,
+  trigger types, sandbox environment, and skills). Contains **no secrets**.
 
 ---
 
